@@ -1,0 +1,15 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Game.cs">
+    <Files>
+      <File FileName="Assets/Scripts/Game.cs" Line="7" Column="53" />
+      <File FileName="Assets/Scripts/GameClient.cs" Line="10" Column="46" />
+      <File FileName="../../../Downloads/Photon-Turnbased-Unity3D-Sdk_v4-0-0-4/demo-turnbased-sandbox/Assets/Demo/DemoGame.cs" Line="106" Column="6" />
+      <File FileName="Assets/Scripts/WebRpcResponse.cs" Line="37" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
