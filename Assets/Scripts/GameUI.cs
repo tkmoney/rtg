@@ -28,6 +28,9 @@ public class GameUI : MonoBehaviour {
 	private GameplayUI gamePlayUiScript;
 
 	void Awake(){
+		if (PlayerPrefs.HasKey("fbtoken")) {
+
+		};
 		FB.Init (onFbinit, onHideUnity);
 	}
 
@@ -78,7 +81,6 @@ public class GameUI : MonoBehaviour {
 		GameClient.AppId = "fdc885b4-203e-4726-90fe-e3a6fc442b4e";
 		GameClient.AppVersion = "1.0";
 		GameClient.OnStateChangeAction += OnStateChanged;
-		Debug.Log ("name");
 	}
 	
 	// Update is called once per frame
@@ -221,6 +223,7 @@ public class GameUI : MonoBehaviour {
 	}
 
 	private void setupGameRoundUi(){
+
 		gamePlayUiScript.setUiForRound (GameInstance.currentRound);
 	}
 
@@ -249,11 +252,13 @@ public class GameUI : MonoBehaviour {
 	}
 
 	public void LeaveRoom(){
+		//clean up, clear game/round data locally 
 		GameClient.OpLeaveRoom(true);
 	}
 
-	public void JoinRoomByName(string name){
-		GameClient.OpJoinRoom (name,true);
+	public void JoinRoomByName(string name, int actorNum){
+		GameClient.OpJoinRoom (name, actorNum);
+		// create 
 	}
 
 	public void FbLogin(){
@@ -315,8 +320,7 @@ public class GameUI : MonoBehaviour {
 		Hashtable playerProps = new Hashtable ();
 		playerProps.Add("pic_url", picUrl);
 		GameClient.LocalPlayer.SetCustomProperties(playerProps);
-		GameClient.OpJoinLobby (FB.UserId, LobbyType.AsyncRandomLobby);
-		//GameClient.ConnectToRegionMaster(region);  // INIT CONNECT
+		GameClient.ConnectToRegionMaster(region);  // INIT CONNECT
 		
 	}
 

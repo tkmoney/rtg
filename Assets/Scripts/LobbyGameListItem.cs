@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class LobbyGameListItem : MonoBehaviour {
 
 	public string roomName = "";
+	public int actorNum;
 	public GameUI GameUiClass;
 	private GameObject roomIdTxtObj;
 	private Text RoomIdTxt;
@@ -23,7 +24,7 @@ public class LobbyGameListItem : MonoBehaviour {
 	}
 
 	public void joinRoom(){
-		GameUiClass.JoinRoomByName (roomName);
+		GameUiClass.JoinRoomByName(roomName, actorNum);
 	}
 
 }

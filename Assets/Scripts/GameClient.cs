@@ -8,10 +8,20 @@ using Hashtable = ExitGames.Client.Photon.Hashtable;
 using Random = UnityEngine.Random;
 using System;
 
+
+public class SaveGameInfo
+{
+	public int MyActorId;
+	public string RoomName;
+	public string DisplayName;
+	public Dictionary<string, object> AvailableProperties;
+
+}
+
 public class GameClient : LoadBalancingClient {
 
 	private byte MaxPlayers = 4;
-	private static string[] RoomPropsInLobby = new string[]{ "t#" };
+	private static string[] RoomPropsInLobby = new string[]{};
 
 
 	
@@ -33,6 +43,8 @@ public class GameClient : LoadBalancingClient {
 			}
 			break;
 		case (byte)OperationCode.JoinGame:
+			Debug.Log("JoinGame!");
+			break;
 		case (byte)OperationCode.ChangeGroups:
 		case (byte)OperationCode.CreateGame:
 			if (this.Server == ServerConnection.GameServer)
@@ -98,9 +110,45 @@ public class GameClient : LoadBalancingClient {
 
 				Dictionary<string,string> dic = new Dictionary<string, string>();
 				dic.Add("id", (string)pair.Key);
+				dic.Add("actorNumber", savedActorNumber.ToString());
 				roomList.Add(dic);
 			}
 			gamelistObject.GetComponent<GamesList>().addGamesListItems(roomList);
+		}
+	}
+
+	public override void OnEvent(EventData photonEvent)
+	{
+		GameUI GameUi = GameObject.Find("Scripts").GetComponent<GameUI>();
+
+		base.OnEvent(photonEvent);
+		
+		switch (photonEvent.Code)
+		{
+		case EventCode.PropertiesChanged:
+			Debug.Log("OnEvent PropertiesChanged!");
+			//Debug.Log("Got Properties via Event. Update board by room props.");
+			//this.LoadBoardFromProperties(true);
+			//this.board.ShowFlippedTiles();
+			break;
+		case EventCode.Join:
+			Debug.Log("OnEvent Join!");
+			if (this.CurrentRoom.Players.Count == 2 && this.CurrentRoom.IsOpen)
+			{
+				this.CurrentRoom.IsOpen = false;
+				this.CurrentRoom.IsVisible = false;
+				//this.SavePlayersInProps();
+			}
+			break;
+		case EventCode.Leave:
+			Debug.Log("OnEvent Leave!");
+
+			//if (this.CurrentRoom.Players.Count == 1 && !this.GameWasAbandoned)
+			//{
+			//	this.CurrentRoom.IsOpen = true;
+			//	this.CurrentRoom.IsVisible = true;
+			//}
+			break;
 		}
 	}
 	

@@ -10,11 +10,6 @@ public class GamesList : MonoBehaviour {
 	void Start () {
 	
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 
 	public void addGamesListItems(List<Dictionary<string,string>> roomList){
 
@@ -25,6 +20,7 @@ public class GamesList : MonoBehaviour {
 			LobbyGameListItem li = instance.GetComponent<LobbyGameListItem> ();
 			li.GameUiClass = gameUi;
 			li.roomName = dic["id"];
+			li.actorNum = int.Parse(dic["actorNumber"]);
 
 		}
 
